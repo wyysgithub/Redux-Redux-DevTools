@@ -1,12 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+/**
+ * 使用 store 管理状态
+ * 分发 action
+ */
+import store from './store'
+import {addCart,updateCart,deleteCart} from "./actions/cart-action";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+console.log(store.getState())
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+let unsubscribe = store.subscribe(()=>{
+    console.log(store.getState())
+})
+
+store.dispatch(addCart('test',2));
+store.dispatch(updateCart('test',5));
+store.dispatch(deleteCart('test'));
+
+unsubscribe();
